@@ -1,5 +1,6 @@
 package io.billie.functional.data
 
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -126,6 +127,22 @@ object Fixtures {
                 "}"
     }
 
+    fun orderRequestJsonOk(orgId: String): String {
+        return "{\n" +
+                "    \"organisation_id\": \"${orgId}\",\n" +
+                "    \"order_amount\": 100.00,\n" +
+                "    \"order_date\": \"20/11/2023\"\n" +
+                "}"
+    }
+
+    fun shipmentRequestJsonOk(orderId: String, amount: String): String {
+        return "{\n" +
+                "    \"order_id\": \"${orderId}\",\n" +
+                "    \"amount\": ${amount},\n" +
+                "    \"shipment_date\": \"20/11/2023\"\n" +
+                "}"
+    }
+
     fun bbcFixture(id: UUID): Map<String, Any> {
         val data = HashMap<String, Any>()
         data["id"] = id
@@ -147,6 +164,13 @@ object Fixtures {
         return data
     }
 
-
+    fun bbcOrderFixture(orderId: UUID, orgId: UUID): Map<String, Any> {
+        val data = HashMap<String, Any>()
+        data["id"] = orderId
+        data["order_date"] = SimpleDateFormat("yyyy-MM-dd").parse("2023-11-20")
+        data["total_amount"] = BigDecimal("100.00")
+        data["organisation_id"] = orgId
+        return data
+    }
 
 }
